@@ -5,502 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stilos Colombia - Barbería & Spa</title>
     
-    <!-- Tailwind CSS (Estilos) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuración de colores personalizados -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            DEFAULT: '#d4af37', // Un dorado más elegante
+                            DEFAULT: '#d4af37',
+                            hover: '#fbbf24'
                         },
+                        boosted: '#26ccca', // Color identidad Boosted [cite: 28, 56]
                         dark: {
                             900: '#0a0a0a',
-                            800: '#171717',
-                            700: '#262626',
+                            800: '#171717'
                         }
                     },
                     fontFamily: {
                         serif: ['Playfair Display', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    screens: {
-                        'xs': '375px', // Breakpoint extra pequeño para móviles
+                        sans: ['Poppins', 'sans-serif'], // Tipografía oficial Boosted [cite: 58]
                     }
                 }
             }
         }
     </script>
 
-    <!-- Iconos (Phosphor Icons) -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
-    <!-- Fuentes Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #0a0a0a;
             color: #e5e5e5;
-            -webkit-tap-highlight-color: transparent; /* Elimina el highlight azul en móviles al tocar */
+            -webkit-tap-highlight-color: transparent;
         }
-        h1, h2, h3, .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .text-gold {
-            color: #d4af37;
-        }
-        .bg-gold {
-            background-color: #d4af37;
-        }
-        .border-gold {
-            border-color: #d4af37;
-        }
-        .hover-gold:hover {
-            color: #fbbf24;
-        }
-        /* Animación suave para aparecer */
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Ocultar scrollbar en la selección inicial si se desea */
-        .hide-scroll::-webkit-scrollbar {
-            display: none;
-        }
-        
-        /* Ajuste para altura en móviles (evita problemas con la barra de navegación del navegador) */
-        .h-screen-mobile {
-            height: 100vh; /* Fallback */
-            height: 100svh; /* Small Viewport Height */
-        }
+        .h-screen-mobile { height: 100vh; height: 100svh; }
     </style>
 </head>
-<body class="antialiased selection:bg-gold selection:text-black">
+<body class="antialiased selection:bg-boosted selection:text-black">
 
-    <!-- ========================================== -->
-    <!-- PANTALLA DE SELECCIÓN (Intro)              -->
-    <!-- ========================================== -->
-    <div id="intro-screen" class="fixed inset-0 z-50 flex flex-col md:flex-row bg-dark-900 h-screen-mobile overflow-hidden">
+    <div id="intro-screen" class="fixed inset-0 z-50 flex flex-col md:flex-row bg-dark-900 h-screen-mobile overflow-hidden transition-opacity duration-500">
         
-        <!-- Opción Barbería -->
         <div class="relative w-full h-1/2 md:h-full md:w-1/2 group cursor-pointer overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-gold/30" onclick="selectService('barber')">
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
-            <div class="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500"></div>
-            <!-- Contenido centrado -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 md:p-6">
-                <i class="ph ph-scissors text-5xl md:text-6xl text-gold mb-2 md:mb-4"></i>
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+            <div class="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <i class="ph ph-scissors text-5xl text-gold mb-4"></i>
                 <h2 class="text-3xl md:text-5xl font-bold text-white uppercase tracking-widest">Barbería</h2>
-                <p class="mt-1 md:mt-2 text-sm md:text-base text-gray-300 group-hover:text-white transition-colors">Cortes clásicos & Barba</p>
-                <button class="mt-4 md:mt-6 px-6 py-2 md:px-8 border border-gold text-gold hover:bg-gold hover:text-black transition-all uppercase tracking-wider text-xs md:text-sm active:bg-gold active:text-black">Entrar</button>
+                <button class="mt-6 px-8 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all uppercase text-sm">Entrar</button>
             </div>
         </div>
 
-        <!-- Opción Uñas -->
         <div class="relative w-full h-1/2 md:h-full md:w-1/2 group cursor-pointer overflow-hidden" onclick="selectService('nails')">
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
-            <div class="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500"></div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 md:p-6">
-                <i class="ph ph-sparkle text-5xl md:text-6xl text-gold mb-2 md:mb-4"></i>
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=1200&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110"></div>
+            <div class="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <i class="ph ph-sparkle text-5xl text-gold mb-4"></i>
                 <h2 class="text-3xl md:text-5xl font-bold text-white uppercase tracking-widest">Uñas & Spa</h2>
-                <p class="mt-1 md:mt-2 text-sm md:text-base text-gray-300 group-hover:text-white transition-colors">Manicure, Pedicure & Arte</p>
-                <button class="mt-4 md:mt-6 px-6 py-2 md:px-8 border border-gold text-gold hover:bg-gold hover:text-black transition-all uppercase tracking-wider text-xs md:text-sm active:bg-gold active:text-black">Entrar</button>
+                <button class="mt-6 px-8 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all uppercase text-sm">Entrar</button>
             </div>
         </div>
 
-        <!-- Logo Central Flotante -->
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-black border-2 border-gold rounded-full p-3 md:p-4 shadow-[0_0_30px_rgba(212,175,55,0.3)] pointer-events-none">
-            <div class="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center text-gold font-serif font-bold text-xl md:text-2xl">
-                SC
-            </div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-black border-2 border-gold rounded-full p-4 pointer-events-none">
+            <div class="w-12 h-12 flex items-center justify-center text-gold font-serif font-bold text-xl">SC</div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- CONTENIDO PRINCIPAL (Oculto inicialmente)  -->
-    <!-- ========================================== -->
     <div id="main-content" class="hidden relative">
-        
-        <!-- Navbar -->
-        <nav class="fixed w-full z-40 bg-black/90 backdrop-blur-md border-b border-white/10 transition-all duration-300" id="navbar">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16 md:h-20">
-                    <div class="flex-shrink-0 cursor-pointer" onclick="location.reload()">
-                        <span class="text-xl md:text-2xl font-serif font-bold text-gold">Stilos <span class="text-white">Colombia</span></span>
-                    </div>
-                    <!-- Desktop Menu -->
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-8">
-                            <a href="#inicio" class="text-white hover:text-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
-                            <a href="#servicios" class="text-gray-300 hover:text-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
-                            <a href="#reservas" class="text-gray-300 hover:text-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Reservas</a>
-                            <a href="#tienda" class="text-gray-300 hover:text-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Tienda</a>
-                            <a href="#nosotros" class="text-gray-300 hover:text-gold px-3 py-2 rounded-md text-sm font-medium transition-colors">Nosotros</a>
-                        </div>
-                    </div>
-                    <!-- Botón cambio de servicio (Desktop) -->
-                    <div class="hidden md:block">
-                        <button onclick="location.reload()" class="text-xs border border-white/20 px-3 py-1 rounded text-gray-400 hover:text-white hover:border-white transition-colors">
-                            Cambiar Servicio
-                        </button>
-                    </div>
-                    <!-- Mobile Menu Button -->
-                    <div class="md:hidden flex">
-                        <button onclick="toggleMobileMenu()" class="text-gold hover:text-white p-2 focus:outline-none">
-                            <i class="ph ph-list text-3xl"></i>
-                        </button>
-                    </div>
+        <nav class="fixed w-full z-40 bg-black/90 backdrop-blur-md border-b border-white/10" id="navbar">
+            <div class="max-w-7xl mx-auto px-4 h-16 md:h-20 flex items-center justify-between">
+                <div class="flex-shrink-0 cursor-pointer" onclick="location.reload()">
+                    <span class="text-xl md:text-2xl font-serif font-bold text-gold">Stilos <span class="text-white">Colombia</span></span>
                 </div>
-            </div>
-            <!-- Mobile Menu Panel -->
-            <div id="mobile-menu" class="hidden md:hidden bg-dark-900 border-b border-gold/20 absolute w-full top-16 left-0">
-                <div class="px-4 pt-4 pb-6 space-y-2">
-                    <a href="#inicio" class="text-white block px-3 py-3 rounded-md text-lg font-medium hover:bg-white/5" onclick="toggleMobileMenu()">Inicio</a>
-                    <a href="#servicios" class="text-gray-300 block px-3 py-3 rounded-md text-lg font-medium hover:bg-white/5" onclick="toggleMobileMenu()">Servicios</a>
-                    <a href="#reservas" class="text-gray-300 block px-3 py-3 rounded-md text-lg font-medium hover:bg-white/5" onclick="toggleMobileMenu()">Reservas</a>
-                    <a href="#tienda" class="text-gray-300 block px-3 py-3 rounded-md text-lg font-medium hover:bg-white/5" onclick="toggleMobileMenu()">Tienda</a>
-                    <button onclick="location.reload()" class="w-full text-left text-gold mt-4 px-3 py-3 border-t border-white/10 font-medium">
-                        <i class="ph ph-arrows-left-right mr-2"></i> Cambiar a Barbería/Uñas
-                    </button>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-white hover:text-gold transition-colors">Inicio</a>
+                    <a href="#servicios" class="text-gray-300 hover:text-gold transition-colors">Servicios</a>
+                    <a href="#reservas" class="text-gray-300 hover:text-gold transition-colors">Reservas</a>
+                    <a href="#tienda" class="text-gray-300 hover:text-gold transition-colors">Tienda</a>
+                </div>
+                <button onclick="location.reload()" class="hidden md:block text-xs border border-white/20 px-3 py-1 rounded text-gray-400">Cambiar Servicio</button>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gold p-2"><i class="ph ph-list text-3xl"></i></button>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section -->
         <header id="inicio" class="relative h-screen-mobile flex items-center justify-center text-center px-4">
-            <!-- La imagen de fondo se inyecta vía JS -->
             <div id="hero-bg" class="absolute inset-0 bg-cover bg-center"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-dark-900"></div>
-            
-            <div class="relative z-10 max-w-4xl mx-auto fade-in w-full">
-                <div class="inline-block p-1.5 px-3 md:p-2 md:px-4 border border-gold/50 rounded-full mb-4 md:mb-6 bg-black/30 backdrop-blur-sm">
-                    <span class="text-gold text-xs md:text-sm tracking-widest uppercase" id="hero-subtitle">EST. 2024 • BOGOTÁ</span>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-dark-900"></div>
+            <div class="relative z-10 max-w-4xl mx-auto fade-in">
+                <div class="inline-block p-2 px-4 border border-gold/50 rounded-full mb-6 bg-black/30 backdrop-blur-sm">
+                    <span class="text-gold text-xs tracking-widest uppercase" id="hero-subtitle"></span>
                 </div>
-                <h1 class="text-4xl xs:text-5xl md:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight" id="hero-title">
-                    <!-- Título Inyectado -->
-                </h1>
-                <p class="text-base xs:text-lg md:text-xl text-gray-300 mb-8 md:mb-10 max-w-2xl mx-auto px-2" id="hero-desc">
-                    <!-- Descripción Inyectada -->
-                </p>
-                <div class="flex flex-col xs:flex-row gap-3 justify-center w-full px-4 xs:px-0">
-                    <a href="#reservas" class="w-full xs:w-auto px-6 py-3 md:px-8 md:py-4 bg-gold text-black font-bold rounded hover:bg-white transition-colors uppercase tracking-wider text-sm md:text-base text-center">
-                        Agendar Cita
-                    </a>
-                    <a href="#servicios" class="w-full xs:w-auto px-6 py-3 md:px-8 md:py-4 border border-white text-white font-bold rounded hover:bg-white hover:text-black transition-colors uppercase tracking-wider text-sm md:text-base text-center">
-                        Ver Precios
-                    </a>
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6" id="hero-title"></h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto" id="hero-desc"></p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#reservas" class="px-8 py-4 bg-gold text-black font-bold rounded hover:bg-white transition-all uppercase text-sm">Agendar Cita</a>
+                    <a href="#servicios" class="px-8 py-4 border border-white text-white font-bold rounded hover:bg-white hover:text-black transition-all uppercase text-sm">Ver Precios</a>
                 </div>
-            </div>
-            
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <i class="ph ph-caret-down text-gold text-2xl md:text-3xl"></i>
             </div>
         </header>
 
-        <!-- Servicios / Precios -->
-        <section id="servicios" class="py-16 md:py-20 bg-dark-900 relative overflow-hidden">
-            <!-- Decoración de fondo -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-10 md:mb-16">
-                    <h2 class="text-gold text-base md:text-lg font-serif italic mb-2">Nuestra Carta</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-white uppercase tracking-wider">Lista de Precios</h3>
+        <section id="servicios" class="py-20 bg-dark-900">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-gold font-serif italic mb-2">Nuestra Carta</h2>
+                    <h3 class="text-4xl font-bold text-white uppercase">Lista de Precios</h3>
                     <div class="w-24 h-1 bg-gold mx-auto mt-4"></div>
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 md:gap-y-8" id="services-list">
-                    <!-- Items inyectados por JS -->
-                </div>
+                <div class="grid md:grid-cols-2 gap-x-12 gap-y-8" id="services-list"></div>
             </div>
         </section>
 
-        <!-- Calendario / Reservas -->
-        <section id="reservas" class="py-16 md:py-20 bg-black relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                    
-                    <div class="w-full md:w-1/3 text-center md:text-left">
-                        <h2 class="text-gold text-base md:text-lg font-serif italic mb-2">Reserva tu espacio</h2>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">AGENDA TU CITA</h3>
-                        <p class="text-gray-400 mb-6 md:mb-8 text-sm md:text-base">
-                            Selecciona el día y la hora que mejor te convenga. Trabajamos con puntualidad para respetar tu tiempo.
-                        </p>
-                        
-                        <div class="space-y-4 md:space-y-6 flex flex-col items-center md:items-start">
-                            <div class="flex items-center gap-4 bg-dark-800/50 p-3 rounded-lg md:bg-transparent md:p-0 w-full md:w-auto">
-                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-dark-800 flex items-center justify-center text-gold border border-gold/20 flex-shrink-0">
-                                    <i class="ph ph-clock text-xl md:text-2xl"></i>
-                                </div>
-                                <div class="text-left">
-                                    <h4 class="text-white font-bold">Horario</h4>
-                                    <p class="text-gray-400 text-sm">Lun - Sáb: 9am - 8pm</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 bg-dark-800/50 p-3 rounded-lg md:bg-transparent md:p-0 w-full md:w-auto">
-                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-dark-800 flex items-center justify-center text-gold border border-gold/20 flex-shrink-0">
-                                    <i class="ph ph-phone text-xl md:text-2xl"></i>
-                                </div>
-                                <div class="text-left">
-                                    <h4 class="text-white font-bold">Contacto</h4>
-                                    <p class="text-gray-400 text-sm">+57 300 123 4567</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full md:w-2/3 bg-dark-800 p-1 md:p-2 rounded-lg border border-white/10 shadow-2xl shadow-gold/10">
-                        <!-- Contenedor del Iframe con altura responsiva -->
-                        <div class="relative w-full h-[400px] md:h-[500px] bg-white rounded overflow-hidden">
-                            <iframe 
-                                id="calendar-iframe"
-                                src="" 
-                                style="border: 0" 
-                                width="100%" 
-                                height="100%" 
-                                frameborder="0" 
-                                scrolling="no">
-                            </iframe>
+        <section id="reservas" class="py-20 bg-black">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/3">
+                    <h3 class="text-3xl font-bold text-white mb-6">AGENDA TU CITA</h3>
+                    <p class="text-gray-400 mb-8">Sincronizado con nuestro sistema de atención inteligente[cite: 16].</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <i class="ph ph-clock text-3xl text-gold"></i>
+                            <div><h4 class="text-white font-bold">Horario</h4><p class="text-gray-400 text-sm">Lun - Sáb: 9am - 8pm</p></div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Tienda de Productos -->
-        <section id="tienda" class="py-16 md:py-20 bg-dark-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-10 md:mb-16">
-                    <h2 class="text-gold text-base md:text-lg font-serif italic mb-2">Para llevar a casa</h2>
-                    <h3 class="text-3xl md:text-4xl font-bold text-white uppercase tracking-wider">Nuestros Productos</h3>
-                    <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-sm md:text-base">Productos profesionales seleccionados por nuestros expertos para mantener tu estilo intacto.</p>
-                </div>
-
-                <div class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="products-grid">
-                    <!-- Productos inyectados por JS -->
+                <div class="w-full md:w-2/3 bg-dark-800 p-2 rounded-lg border border-white/10">
+                    <div class="w-full h-[500px] bg-white rounded overflow-hidden">
+                        <iframe id="calendar-iframe" src="" style="border:0" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Quiénes Somos -->
-        <section id="nosotros" class="py-16 md:py-20 bg-black border-t border-white/5">
-            <div class="max-w-4xl mx-auto px-4 text-center">
-                <i class="ph ph-crown text-4xl md:text-5xl text-gold mb-4 md:mb-6 inline-block"></i>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8 font-serif">Sobre Stilos Colombia</h2>
-                <p class="text-base md:text-lg text-gray-300 leading-relaxed mb-8">
-                    Nacimos con la misión de redefinir el cuidado personal en Colombia. No somos solo una barbería o un spa de uñas; somos un santuario donde la estética clásica se encuentra con las técnicas modernas. Nuestro equipo de profesionales está dedicado a brindar no solo un servicio, sino una experiencia de relajación y estilo inigualable.
-                </p>
-                <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-                    <span class="px-3 py-1.5 md:px-4 md:py-2 border border-gold/30 rounded text-gold text-xs md:text-sm">Expertos Certificados</span>
-                    <span class="px-3 py-1.5 md:px-4 md:py-2 border border-gold/30 rounded text-gold text-xs md:text-sm">Productos Premium</span>
-                    <span class="px-3 py-1.5 md:px-4 md:py-2 border border-gold/30 rounded text-gold text-xs md:text-sm">Ambiente VIP</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="bg-dark-900 pt-12 md:pt-16 pb-8 border-t border-gold/20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-12 text-center md:text-left">
-                    <div>
-                        <h3 class="text-2xl font-serif font-bold text-gold mb-4">Stilos Colombia</h3>
-                        <p class="text-gray-500 mb-4 text-sm md:text-base">Elevando tu imagen al siguiente nivel.</p>
-                        <div class="flex justify-center md:justify-start gap-4">
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="ph ph-instagram-logo text-2xl"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="ph ph-facebook-logo text-2xl"></i></a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="ph ph-tiktok-logo text-2xl"></i></a>
-                        </div>
-                    </div>
-                    <div class="hidden md:block">
-                        <h4 class="text-white font-bold mb-4 uppercase tracking-wider">Enlaces Rápidos</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#inicio" class="hover:text-gold">Inicio</a></li>
-                            <li><a href="#servicios" class="hover:text-gold">Servicios</a></li>
-                            <li><a href="#reservas" class="hover:text-gold">Reservar Cita</a></li>
-                            <li><a href="#tienda" class="hover:text-gold">Tienda</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold mb-4 uppercase tracking-wider">Ubicación</h4>
-                        <p class="text-gray-400 mb-2 text-sm md:text-base">Calle 123 # 45 - 67</p>
-                        <p class="text-gray-400 mb-2 text-sm md:text-base">Bogotá, Colombia</p>
-                        <a href="https://maps.google.com" target="_blank" class="text-gold text-sm hover:underline flex items-center justify-center md:justify-start gap-2">
-                            <i class="ph ph-map-pin"></i> Ver en Mapa
-                        </a>
-                    </div>
-                </div>
-                <div class="border-t border-white/5 pt-8 text-center">
-                    <p class="text-gray-600 text-xs md:text-sm">&copy; 2024 Stilos Colombia. Todos los derechos reservados.</p>
-                </div>
-            </div>
+        <footer class="bg-dark-900 py-12 border-t border-gold/20 text-center">
+            <p class="text-gold font-serif text-xl mb-4">Stilos Colombia</p>
+            <p class="text-gray-600 text-sm">© 2024 • Inteligencia que trabaja por ti[cite: 68].</p>
         </footer>
 
-        <!-- Botón Flotante WhatsApp -->
-        <a href="https://wa.me/573001234567" target="_blank" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-green-600 text-white p-3 md:p-4 rounded-full shadow-lg hover:bg-green-500 transition-all hover:scale-110 z-50 flex items-center justify-center active:scale-95">
-            <i class="ph ph-whatsapp-logo text-2xl md:text-3xl"></i>
+        <a id="wa-float" href="#" target="_blank" class="fixed bottom-6 right-6 bg-green-600 text-white p-4 rounded-full shadow-lg hover:scale-110 transition-all z-50">
+            <i class="ph ph-whatsapp-logo text-3xl"></i>
         </a>
     </div>
 
-    <!-- ========================================== -->
-    <!-- JAVASCRIPT LOGIC                           -->
-    <!-- ========================================== -->
     <script>
-        // --- BASE DE DATOS (Contenido Dinámico) ---
         const contentData = {
             barber: {
                 title: "BARBERÍA CLÁSICA",
                 subtitle: "EL ARTE DEL CABALLERO",
-                desc: "Donde la tradición de la vieja escuela se encuentra con el estilo moderno. Cortes precisos, afeitados con toalla caliente y un ambiente exclusivo.",
-                bgImage: "https://images.unsplash.com/photo-1503951914875-452162b7f30a?q=80&w=2070&auto=format&fit=crop", // Barbería oscura
-                calendarUrl: "https://calendar.google.com/calendar/embed?src=es.co%23holiday%40group.v.calendar.google.com&ctz=America%2FBogota", // Ejemplo Calendar 1
+                desc: "Tradición y estilo moderno bajo un enfoque de precisión[cite: 51].",
+                bgImage: "https://images.unsplash.com/photo-1503951914875-452162b7f30a?q=80&w=1200&auto=format&fit=crop",
+                calendarUrl: "TU_URL_DE_CALENDLY_O_GOOGLE_BARBERIA",
                 services: [
-                    { name: "Corte Clásico", price: "$25.000", detail: "Tijera y máquina, acabado natural." },
-                    { name: "Corte + Barba", price: "$40.000", detail: "Ritual completo con toalla caliente." },
-                    { name: "Perfilado de Cejas", price: "$10.000", detail: "Limpieza con navaja." },
-                    { name: "Mascarilla Black", price: "$15.000", detail: "Limpieza profunda de poros." },
-                    { name: "Diseño Tribal", price: "$15.000+", detail: "Arte capilar personalizado." },
-                    { name: "Corte Niño", price: "$20.000", detail: "Paciencia y estilo para los pequeños." }
-                ],
-                products: [
-                    { name: "Cera Mate Strong", price: "$35.000", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=500" },
-                    { name: "Aceite para Barba", price: "$28.000", image: "https://images.unsplash.com/photo-1626285861696-9f0bf5a49c6d?auto=format&fit=crop&q=80&w=500" },
-                    { name: "Gel de Afeitar", price: "$22.000", image: "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?auto=format&fit=crop&q=80&w=500" }
+                    { name: "Corte Clásico", price: "$25.000", detail: "Acabado natural a tijera y máquina." },
+                    { name: "Corte + Barba", price: "$40.000", detail: "Ritual completo con toalla caliente." }
                 ]
             },
             nails: {
-                title: "NAILS SPA & BOUTIQUE",
+                title: "NAILS SPA",
                 subtitle: "BELLEZA EN TUS MANOS",
-                desc: "Un espacio diseñado para tu relajación. Expertos en nail art, cuidado de manos y pies con los mejores productos del mercado.",
-                bgImage: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?q=80&w=2070&auto=format&fit=crop", // Nails elegante
-                calendarUrl: "https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FBogota", // Ejemplo Calendar 2
+                desc: "Relajación y arte en un ecosistema digital diseñado para ti[cite: 77].",
+                bgImage: "https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?q=80&w=1200&auto=format&fit=crop",
+                calendarUrl: "TU_URL_DE_CALENDLY_O_GOOGLE_UNAS",
                 services: [
-                    { name: "Manicure Semi", price: "$45.000", detail: "Limpieza + Esmaltado larga duración." },
-                    { name: "Pedicure Spa", price: "$55.000", detail: "Hidratación, masaje y exfoliación." },
-                    { name: "Uñas Acrílicas", price: "$90.000", detail: "Esculpidas a tu gusto (Set completo)." },
-                    { name: "Retiro de Sistema", price: "$20.000", detail: "Cuidado de la uña natural." },
-                    { name: "Nail Art (x2 uñas)", price: "$12.000", detail: "Diseños a mano alzada." },
-                    { name: "Baño de Gel", price: "$60.000", detail: "Refuerzo sobre uña natural." }
-                ],
-                products: [
-                    { name: "Aceite de Cutícula", price: "$15.000", image: "https://images.unsplash.com/photo-1610992015732-2449b0c26670?auto=format&fit=crop&q=80&w=500" },
-                    { name: "Crema de Manos", price: "$30.000", image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=500" },
-                    { name: "Kit Esmaltes Mini", price: "$45.000", image: "https://images.unsplash.com/photo-1632973547304-460344878025?auto=format&fit=crop&q=80&w=500" }
+                    { name: "Manicure Semi", price: "$45.000", detail: "Limpieza y esmaltado de larga duración." },
+                    { name: "Pedicure Spa", price: "$55.000", detail: "Hidratación y exfoliación profunda." }
                 ]
             }
         };
 
-        // --- FUNCIONES LÓGICAS ---
-
         function selectService(type) {
             const data = contentData[type];
-            if (!data) return;
-
-            // 1. Ocultar pantalla de selección con transición
-            const introScreen = document.getElementById('intro-screen');
-            introScreen.style.opacity = '0';
-            introScreen.style.pointerEvents = 'none';
+            document.getElementById('intro-screen').classList.add('opacity-0');
             setTimeout(() => {
-                introScreen.style.display = 'none';
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('main-content').classList.remove('hidden');
+                
+                document.getElementById('hero-title').textContent = data.title;
+                document.getElementById('hero-subtitle').textContent = data.subtitle;
+                document.getElementById('hero-desc').textContent = data.desc;
+                document.getElementById('hero-bg').style.backgroundImage = `url('${data.bgImage}')`;
+                document.getElementById('calendar-iframe').src = data.calendarUrl;
+                document.getElementById('wa-float').href = `https://wa.me/573001234567?text=Hola, quiero agendar en ${data.title}`;
+
+                const container = document.getElementById('services-list');
+                container.innerHTML = data.services.map(s => `
+                    <div class="flex justify-between items-end border-b border-gray-800 pb-4 group">
+                        <div>
+                            <h4 class="text-xl font-bold text-white group-hover:text-gold transition-colors">${s.name}</h4>
+                            <p class="text-gray-500 text-sm">${s.detail}</p>
+                        </div>
+                        <div class="text-2xl font-serif text-gold font-bold">${s.price}</div>
+                    </div>
+                `).join('');
             }, 500);
-
-            // 2. Mostrar contenido principal
-            const mainContent = document.getElementById('main-content');
-            mainContent.classList.remove('hidden');
-            mainContent.classList.add('fade-in');
-
-            // 3. Inyectar Datos del Hero
-            document.getElementById('hero-title').textContent = data.title;
-            document.getElementById('hero-subtitle').textContent = data.subtitle;
-            document.getElementById('hero-desc').textContent = data.desc;
-            document.getElementById('hero-bg').style.backgroundImage = `url('${data.bgImage}')`;
-
-            // 4. Inyectar Servicios
-            const servicesContainer = document.getElementById('services-list');
-            servicesContainer.innerHTML = ''; // Limpiar anterior
-            data.services.forEach(service => {
-                const serviceHtml = `
-                    <div class="flex justify-between items-end border-b border-gray-800 pb-3 md:pb-4 hover:border-gold/50 transition-colors group">
-                        <div class="pr-4">
-                            <h4 class="text-lg md:text-xl font-bold text-white group-hover:text-gold transition-colors">${service.name}</h4>
-                            <p class="text-gray-500 text-xs md:text-sm mt-0.5 md:mt-1">${service.detail}</p>
-                        </div>
-                        <div class="text-xl md:text-2xl font-serif text-gold font-bold whitespace-nowrap">${service.price}</div>
-                    </div>
-                `;
-                servicesContainer.innerHTML += serviceHtml;
-            });
-
-            // 5. Configurar Calendario
-            document.getElementById('calendar-iframe').src = data.calendarUrl;
-
-            // 6. Inyectar Productos
-            const productsContainer = document.getElementById('products-grid');
-            productsContainer.innerHTML = '';
-            data.products.forEach(prod => {
-                // Mensaje de WhatsApp pre-llenado
-                const waMessage = `Hola Stilos Colombia, estoy interesado en comprar el producto: ${prod.name}`;
-                const waLink = `https://wa.me/573001234567?text=${encodeURIComponent(waMessage)}`;
-
-                const prodHtml = `
-                    <div class="bg-black border border-white/10 rounded-lg overflow-hidden group hover:border-gold/50 transition-all hover:shadow-lg hover:shadow-gold/5 flex flex-col h-full">
-                        <div class="h-48 md:h-64 overflow-hidden relative flex-shrink-0">
-                            <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                        </div>
-                        <div class="p-4 md:p-6 flex flex-col flex-grow">
-                            <h4 class="text-lg md:text-xl font-bold text-white mb-2 line-clamp-2">${prod.name}</h4>
-                            <div class="flex justify-between items-center mt-auto pt-4">
-                                <span class="text-xl md:text-2xl text-gold font-serif font-bold">${prod.price}</span>
-                                <a href="${waLink}" target="_blank" class="bg-white text-black px-3 py-2 md:px-4 md:py-2 rounded font-bold hover:bg-gold transition-colors flex items-center gap-2 text-xs md:text-sm uppercase tracking-wide">
-                                    <i class="ph ph-shopping-bag"></i> Comprar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                productsContainer.innerHTML += prodHtml;
-            });
         }
 
-        // --- MENU MOVIL ---
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.querySelector('.ph-list');
-            
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                icon.classList.remove('ph-list');
-                icon.classList.add('ph-x');
-            } else {
-                menu.classList.add('hidden');
-                icon.classList.remove('ph-x');
-                icon.classList.add('ph-list');
-            }
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
         }
-
-        // --- EFECTO NAVBAR SCROLL ---
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-md', 'bg-black/95');
-                navbar.classList.remove('bg-black/90');
-            } else {
-                navbar.classList.remove('shadow-md', 'bg-black/95');
-                navbar.classList.add('bg-black/90');
-            }
-        });
-
     </script>
 </body>
 </html>
