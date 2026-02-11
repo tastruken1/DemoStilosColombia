@@ -1,0 +1,60 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a;
+    color: #e5e5e5;
+    -webkit-tap-highlight-color: transparent;
+    /* Elimina el highlight azul en móviles al tocar */
+}
+
+h1,
+h2,
+h3,
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+.text-gold {
+    color: #d4af37;
+}
+
+.bg-gold {
+    background-color: #d4af37;
+}
+
+.border-gold {
+    border-color: #d4af37;
+}
+
+.hover-gold:hover {
+    color: #fbbf24;
+}
+
+/* Animación suave para aparecer */
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ocultar scrollbar en la selección inicial si se desea */
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ajuste para altura en móviles (evita problemas con la barra de navegación del navegador) */
+.h-screen-mobile {
+    height: 100vh;
+    /* Fallback */
+    height: 100svh;
+    /* Small Viewport Height */
+}
